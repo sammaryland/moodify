@@ -10,7 +10,7 @@ pip install virtualenv
 Create Virtual Environment
 
 ```
-virtualenv -p /usr/bin/python2.7 venv2/7
+virtualenv -p /usr/bin/python2.7 venv2.7
 source venv2.7/bin/activate
 ```
 
