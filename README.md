@@ -1,2 +1,2 @@
 # Moodify
-## Sam Maryland, Taylor Wilson, Amanda Holloman
+#### Sam Maryland, Taylor Wilson, Amanda Holloman
