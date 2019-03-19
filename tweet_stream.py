@@ -10,8 +10,10 @@ import urllib2
 import json
 import operator
 import time
+import numpy
 from itertools import islice
-import string
+import nltk
+nltk.download('words')
 
 import sys
 reload(sys)
@@ -41,8 +43,6 @@ oauth_request.sign_request(signature_method_hmac_sha1, consumer, token)
 
 hashtag_freq = {}
 
-printable = set(string.printable)
-
 res = urllib2.urlopen(oauth_request.to_url())
 start_time = time.ctime()
 timeout = time.time() + 10
@@ -58,8 +58,7 @@ while True:
     if len(tweet["entities"]["hashtags"]) != 0:
       t = tweet["text"]
       h = tweet["entities"]["hashtags"][0]["text"]
-      filter(lambda x: x in printable, t)
-      filter(lambda x: x in printable, h)
+
       print t + " " + h
       if time.time() > timeout:
         break
