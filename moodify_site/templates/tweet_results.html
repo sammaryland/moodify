@@ -1,18 +1,21 @@
+<!DOCTYPE html>
 <html>     
   <head>         
-  <title>Tweet Search</title>     
+    <title>Search Results</title>   
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">  
   </head>     
   <body>       
-    <p>Showing Last 10 Tweets for User: <strong>{{ uname }}</strong></p>
-    {% if tweets %}           
-    <p>Found {{ tweets|length }} tweet{{ tweets|pluralize }}.</p>
-    <ul>               
-      {% for tweet in tweets %}               
-        <li>{{ tweet.full_text }}</li>               
-      {% endfor %}           
-    </ul>       
-    {% else %}           
-      <p>User Does not Exist.</p>       
-    {% endif %}     
+    <div class="container">  
+      <h3>Showing Last {{ tweets|length }} Tweets for User <strong>@{{uname }}</strong></h3>
+      {% if tweets %}           
+      <ul>               
+        {% for tweet in tweets %}               
+          <li>{{ tweet.full_text }}</li>               
+        {% endfor %}           
+      </ul>       
+      {% else %}           
+        <p>User Does not Exist.</p>       
+      {% endif %} 
+    </div>    
   </body>
 </html>

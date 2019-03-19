@@ -28,7 +28,7 @@ def get_tweets(request):
     auth.set_access_token(access_key, access_secret)
     api = tweepy.API(auth)
 
-    new_tweets = api.user_timeline(screen_name=uname, count=10, tweet_mode="extended")
+    new_tweets = api.user_timeline(screen_name=uname, tweet_mode="extended")
     return render(request, 'tweet_results.html', {'uname': uname, 'tweets': new_tweets})
   
   else:
