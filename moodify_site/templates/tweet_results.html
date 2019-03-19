@@ -1,0 +1,18 @@
+<html>     
+  <head>         
+  <title>Tweet Search</title>     
+  </head>     
+  <body>       
+    <p>Showing Last 10 Tweets for User: <strong>{{ uname }}</strong></p>
+    {% if tweets %}           
+    <p>Found {{ tweets|length }} tweet{{ tweets|pluralize }}.</p>
+    <ul>               
+      {% for tweet in tweets %}               
+        <li>{{ tweet.full_text }}</li>               
+      {% endfor %}           
+    </ul>       
+    {% else %}           
+      <p>User Does not Exist.</p>       
+    {% endif %}     
+  </body>
+</html>
