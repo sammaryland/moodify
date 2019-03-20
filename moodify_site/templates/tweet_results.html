@@ -6,16 +6,29 @@
   </head>     
   <body>       
     <div class="container">  
-      <h3>Showing Last {{ tweets|length }} Tweets for User <strong>@{{uname }}</strong></h3>
-      {% if tweets %}           
+      <h3>Showing Last {{ tweets|length }} Tweets for User <strong>@{{uname }}</strong></h3>          
       <ul>               
         {% for tweet in tweets %}               
           <li>{{ tweet.full_text }}</li>               
         {% endfor %}           
       </ul>       
-      {% else %}           
-        <p>User Does not Exist.</p>       
-      {% endif %} 
+      <h3>Tone Analysis for Tweets</h3>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Tone</th>
+            <th scope="col">Score</th>
+          </tr>
+        </thead>
+        <tbody>  
+          {% for k, v in results.items %}
+            <tr>
+              <td>{{ k }}</td>
+              <td>{{ v }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
     </div>    
   </body>
 </html>
