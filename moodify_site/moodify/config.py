@@ -1,6 +1,6 @@
-consumer_key = "ckWshdUaNqkODubT0ud1aYTwZ"
-consumer_secret = "aBahFPcKiAFuH6UnyY1RS1TCPHpUZTAiDqutfROjQC4h1L20Bp"
-access_key = "354408891-XPtSKVLf38W2ECToclWdPpL3FwjUVJAmvecILDLU"
-access_secret = "Guh9GvZCRC76jDwx8rTskVhlZHnB5JMXFdc6KPD4mYql8"
+consumer_key = "CONSUMER_KEY"
+consumer_secret = "CONSUMER_SECRET"
+access_key = "ACCESS_KEY"
+access_secret = "ACCESS_SECRET"
 
-watson_api_key = "EStPh4O30AR8mD2256cdS8W6e_FJ4gShgUYCIg3XyN0l"
+watson_api_key = "WATSON_API_KEY"
