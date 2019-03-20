@@ -1,6 +1,11 @@
 # Moodify
 #### Sam Maryland, Taylor Wilson, Amanda Holloman
 
+Update your API keys located in config.py
+```
+moodify_site/moodify/config.py
+```
+
 Install Virtualenv
 
 ```
