@@ -11,7 +11,7 @@
           <li class="list-group-item list-group-item-primary">{{ tweet.full_text }}</li>               
         {% endfor %}           
       </ul>       
-      <br>
+      <hr>
       <h3>Tone Analysis for Tweets</h3>
       <table class="table">
         <thead class="thead-dark">
@@ -29,6 +29,19 @@
           {% endfor %}
         </tbody>
       </table>
+      <hr>
+      <h3>Generate a Playlist</h3>
+      <form action="/view_playlist/" method="GET">
+        <div class="form-group">
+          <label for="view-playlist">Favorite Artist</label>
+          <div class="input-group mb-3">
+            <input type="hidden" name="results" value="{{ results }}">
+            <input id="view-playlist" class="form-control" type="text" name="Artist" placeholder="Artist" aria-describedby="basic-addon1">
+          </div>
+          <small id="usernameHelp" class="form-text text-muted">If you can't think of one, try 'The Beatles'!</small>
+        </div> 
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
     </div>   
     
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

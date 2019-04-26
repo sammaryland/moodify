@@ -2,9 +2,15 @@
 Moodify is a Python-based web application which will generate a Spotify playlist based on the tone of a user's tweets. The tweets are retrieved using Tweepy, then sent to the IBM Watson Tone Analyzer for analysis. Based on the results, the user will recieve a Spotify playlist.
 
 ## Prerequisites
-Update your API keys located in config.py
+Update your Twitter and Watson API keys located in config.py
 ```
 moodify_site/moodify/config.py
+```
+
+Update your Spotify API keys via command line such as:
+```
+export SPOTIFY_CLIENT_ID='SPOTIFY_CLIENT_ID'
+export SPOTIFY_CLIENT_SECRET='SPOTIFY_CLIENT_SECRET'
 ```
 
 Install Virtualenv
@@ -37,6 +43,8 @@ Point your browser to:
 ```
 127.0.0.1:8000
 ```
+
+Enter any Twitter username. For the demo, enter 'JessicaGonzo5', then submit.
 
 ## Authors
 * **Sam Maryland**

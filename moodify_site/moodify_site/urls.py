@@ -23,4 +23,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', moodify_views.index, name="home"),
     url(r'^get_tweets/$', csrf_exempt(moodify_views.get_tweets), name="get_tweets"),
+    url(r'^view_playlist/$', csrf_exempt(moodify_views.view_playlist), name="view_playlist"),
 ]

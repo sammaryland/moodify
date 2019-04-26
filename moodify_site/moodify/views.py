@@ -16,6 +16,8 @@ import tweepy
 from watson_developer_cloud import ToneAnalyzerV3
 import urllib, json
 
+from recommender.api import Recommender
+
 import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
@@ -53,6 +55,8 @@ def get_tweets(request):
 
     new_tweets = api.user_timeline(screen_name=uname, count=10, tweet_mode="extended")
     results = analyze_tweets(new_tweets)
+    request.session['results'] = results
+
     return render(request, 'tweet_results.html', {'uname': uname, 'tweets': new_tweets, 'results': results})
   
   else:
@@ -60,7 +64,93 @@ def get_tweets(request):
   
   return HttpResponse(message)
 
+def recommend_songs(artist, danceability, energy, valence):
+  recommender = Recommender()
+  recommender.artists = artist
+  recommender.limit = 10
+  recommender.track_attributes = {
+      'max_danceability': danceability,
+      'max_energy': energy,
+      'max_valence': valence
+  }
+
+  return recommender.find_recommendations()
+
+def view_playlist(request):
+  if 'Artist' in request.GET:
+    artist = request.GET['Artist']
+    d = request.session['results']
+    analyticalScore = 0
+    angerScore = 0
+    confidentScore = 0
+    disgustScore = 0
+    fearScore = 0
+    joyScore = 0
+    sadnessScore = 0
+    tentativeScore = 0
+
+    if 'Analytical' in d:
+      analyticalScore = d['Analytical']
+
+    if 'Joy' in d:
+      joyScore = d['Joy']
+
+    if 'Confident' in d:
+      confidentScore = d['Confident']
+
+    if 'Sadness' in d:
+      sadnessScore = d['Sadness']
+
+    if 'Anger' in d:
+      angerScore = d['Anger']
+
+    if 'Tentative' in d:
+      tentativeScore = d['Tentative']
+
+    if 'Fear' in d:
+      fearScore = d['Fear']
+
+    if 'Disgust' in d:
+      disgustScore = d['Disgust']
+
+    valence = 0
+    if (joyScore > sadnessScore):
+      valence = joyScore - sadnessScore
+    else:
+      valence = sadnessScore - joyScore
+
+    dPositive = ((confidentScore * 4) + (joyScore * 6)) / 10
+    dNegative = ((tentativeScore * 3) + (fearScore * 7)) / 10
+    danceability = 0
+
+    ePositive = ((joyScore * 8) + (analyticalScore * 2))/10
+    eNegative = ((disgustScore * 3) + (sadnessScore * 7))/10
+    eBonus = 0
+    energy = 0
+    if (angerScore > 0.2):
+      eBonus = angerScore * 2
+
+    if (dPositive > dNegative):
+      danceability = dPositive - dNegative
+    else:
+      danceability = (1 - dNegative) + dPositive
+
+    if (ePositive > eNegative):
+      energy = ePositive - eNegative + eBonus
+    else:
+      energy = (1 - eNegative) + ePositive + eBonus
+
+    if (energy > 1):
+      energy = 1
+
+    songs = recommend_songs(artist, danceability, energy, valence)
+    
+    return render(request, 'view_playlist.html', {'songs': songs['tracks']})
+
 
 @ensure_csrf_cookie
 def index(request):
     return render_to_response('index.html')
+
+# emotion - anger, disgust, fear, joy and sadness
+# language syles - analytical, confident and tentative
